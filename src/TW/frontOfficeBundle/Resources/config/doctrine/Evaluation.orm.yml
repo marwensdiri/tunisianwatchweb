@@ -1,0 +1,44 @@
+TW\frontOfficeBundle\Entity\Evaluation:
+    type: entity
+    table: evaluation
+    indexes:
+        fk_utilisateur_has_reclamation_reclamation1_idx:
+            columns:
+                - idreclamation
+        fk_utilisateur_has_reclamation_utilisateur1_idx:
+            columns:
+                - idcitoyen
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        note:
+            type: boolean
+            nullable: true
+            comment: ''
+    manyToOne:
+        idcitoyen:
+            targetEntity: Utilisateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idcitoyen:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idreclamation:
+            targetEntity: Reclamation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idreclamation:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

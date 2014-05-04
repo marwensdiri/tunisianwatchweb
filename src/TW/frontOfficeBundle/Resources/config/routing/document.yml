@@ -1,0 +1,30 @@
+document:
+    pattern:  /
+    defaults: { _controller: "TWfrontOfficeBundle:Document:index" }
+
+document_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TWfrontOfficeBundle:Document:show" }
+
+document_new:
+    pattern:  /new
+    defaults: { _controller: "TWfrontOfficeBundle:Document:new" }
+
+document_create:
+    pattern:  /create
+    defaults: { _controller: "TWfrontOfficeBundle:Document:create" }
+    requirements: { _method: post }
+
+document_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TWfrontOfficeBundle:Document:edit" }
+
+document_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TWfrontOfficeBundle:Document:update" }
+    requirements: { _method: post|put }
+
+document_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TWfrontOfficeBundle:Document:delete" }
+    requirements: { _method: post|delete }

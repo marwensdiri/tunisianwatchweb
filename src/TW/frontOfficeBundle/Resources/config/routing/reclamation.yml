@@ -1,0 +1,30 @@
+Reclamation:
+    pattern:  /
+    defaults: { _controller: "TWfrontOfficeBundle:Default:index" }
+
+Reclamation_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:show" }
+
+Reclamation_new:
+    pattern:  /new
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:new" }
+
+Reclamation_create:
+    pattern:  /create
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:create" }
+    requirements: { _method: post }
+
+Reclamation_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:edit" }
+
+Reclamation_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:update" }
+    requirements: { _method: post|put }
+
+Reclamation_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TWfrontOfficeBundle:Reclamation:delete" }
+    requirements: { _method: post|delete }

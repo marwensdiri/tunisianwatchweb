@@ -1,0 +1,176 @@
+{%extends "TWfrontOfficeBundle::layout.html.twig" %}
+
+{% block content %}
+    <script src="{{asset('assets/js/jquery-1.8.2.min.js')}}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#tw_frontofficebundle_reclamation_documents');
+            // On ajoute un lien pour ajouter une nouvelle catégorie
+            var $lienAjout = $('<div class="control-group"><div class="controls"><a href="#" id="ajout_document" class="btn btn-danger">Ajouter un document</a></div></div>');
+            $container.append($lienAjout);
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $lienAjout.click(function(e) {
+                ajouterCategorie($container);
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+            });
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+            // On ajoute un premier champ directement s'il n'en existe pas déjà un (cas d'un nouvel article par exemple).
+            if (index == 0) {
+               // ajouterCategorie($container);
+            } else {
+                // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+                $container.children('div').each(function() {
+                    ajouterLienSuppression($(this));
+                });
+            }
+            // La fonction qui ajoute un formulaire Categorie
+            function ajouterCategorie($container) {
+                // Dans le contenu de l'attribut « data-prototype », on remplace :
+                // - le texte "__name__label__" qu'il contient par le label du champ
+                // - le texte "__name__" qu'il contient par le numéro du champ
+                var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Document n°' + (index + 1))
+                        .replace(/__name__/g, index));
+                // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+                ajouterLienSuppression($prototype);
+                // On ajoute le prototype modifié à la fin de la balise <div>
+                $container.append($prototype);
+                // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+                index++;
+            }
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function ajouterLienSuppression($prototype) {
+                // Création du lien
+                $lienSuppression = $('<div class="control-group"><div class="controls"><a href="#" class="btn btn-danger">Supprimer</a></div></div>');
+                // Ajout du lien
+                $prototype.append($lienSuppression);
+                // Ajout du listener sur le clic du lien
+                $lienSuppression.click(function(e) {
+                    $prototype.remove();
+                    e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                    return false;
+                });
+            }
+        });
+
+        function initialize() {
+            var myLatlng = new google.maps.LatLng(-25.363882, 131.044922);
+            var mapOptions = {
+                zoom: 4,
+                center: myLatlng
+            }
+            var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+
+            var myMarker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                draggable: true,
+                title: 'Hello World!'
+            });
+
+            google.maps.event.addListener(myMarker, 'dragend', function(evt) {
+                document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+            });
+
+            google.maps.event.addListener(myMarker, 'dragstart', function(evt) {
+                document.getElementById('current').innerHTML = '<p>Currently dragging marker...</p>';
+            });
+        }
+
+
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+    </script>
+    <div class="container">
+        <div class="main">
+            <div class="content">
+                {{ form_start(form) }}
+                <div class="row">
+                    <div class="span6">
+                        <h3><strong>1.</strong> <span>Reclamation</span></h3>
+                        <div class="control-group">
+                            {{ form_label(form.titre) }}
+                            <div class="controls">
+                                {{ form_widget(form.titre) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            {{ form_label(form.description) }}
+                            <div class="controls">
+                                {{ form_widget(form.description) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+
+                        <div class="control-group">
+                            {{ form_label(form.iddomaine) }}
+                            <div class="controls">
+                                {{ form_widget(form.iddomaine) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+
+                            <div class="controls">
+                                {{ form_widget(form.documents) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                    </div>
+
+                    <div class="span4">
+                        <h3><strong>2.</strong> <span>Lieu de la Reclamation</span></h3>
+                        <div class="control-group">
+                            {{ form_label(form.idlieu) }}
+                            <div class="controls">
+                                {{ form_widget(form.idlieu) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                        <div class="control-group">
+                        </div>
+                        <div class="control-group" style="position:absolute">
+                            Lieu par Map:
+                            <div class="controls" style="right: 0px">
+                                <div id="googleMap" style="width:500px;height:360px;"></div>
+                            </div><!-- /.controls -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span7">
+                        <h3><strong>3.</strong> <span>Date</span></h3>
+
+                        <div class="control-group">
+                            {{ form_label(form.date) }}
+                            <div class="controls">
+                                {{ form_widget(form.date) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+
+                        <div class="control-group">
+                            {{ form_label(form.heure) }}
+                            <div class="controls">
+                                {{ form_widget(form.heure) }}
+                            </div><!-- /.controls -->
+                        </div><!-- /.control-group -->
+                    </div>
+                </div><!-- /.row -->
+                <div class="row">
+                    <div class="control-group">
+                        <div class="controls">
+                            <center>{{ form_end(form) }}</center>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+

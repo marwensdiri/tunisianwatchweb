@@ -1,0 +1,23 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div style="height: 400px" class="fos_user_user_show">
+    
+    
+    <br><br>
+    <table  class="profile">
+                                                <tbody>
+                                                    <tr>
+                                                        <th style="color: #E63434" class="username">{{ 'Username'|trans }}:</th>
+                                                        <td>{{ user.username }}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th style="color: #E63434" class="email">{{ 'Email'|trans }}:</th>
+                                                        <td>{{ user.email }}</td>
+                                                    </tr>
+                                                  
+                                                </tbody>
+                                            </table>
+   <br><br>
+</div>
+                                                    
+

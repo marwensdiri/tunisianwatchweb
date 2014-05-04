@@ -1,0 +1,30 @@
+domaine:
+    pattern:  /
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:index" }
+
+domaine_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:show" }
+
+domaine_new:
+    pattern:  /new
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:new" }
+
+domaine_create:
+    pattern:  /create
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:create" }
+    requirements: { _method: post }
+
+domaine_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:edit" }
+
+domaine_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:update" }
+    requirements: { _method: post|put }
+
+domaine_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TWfrontOfficeBundle:Domaine:delete" }
+    requirements: { _method: post|delete }

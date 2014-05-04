@@ -1,0 +1,30 @@
+lieu:
+    pattern:  /
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:index" }
+
+lieu_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:show" }
+
+lieu_new:
+    pattern:  /new
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:new" }
+
+lieu_create:
+    pattern:  /create
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:create" }
+    requirements: { _method: post }
+
+lieu_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:edit" }
+
+lieu_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:update" }
+    requirements: { _method: post|put }
+
+lieu_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TWfrontOfficeBundle:Lieu:delete" }
+    requirements: { _method: post|delete }

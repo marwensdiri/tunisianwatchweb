@@ -1,0 +1,88 @@
+TW\frontOfficeBundle\Entity\Reclamation:
+    type: entity
+    table: reclamation
+    indexes:
+        fk_reclamation_utilisateur1_idx:
+            columns:
+                - idcitoyen
+        fk_reclamation_domaine2_idx:
+            columns:
+                - iddomaine
+        fk_reclamation_geolocalisation1_idx:
+            columns:
+                - idgeolocalisation
+        fk_reclamation_lieu1_idx:
+            columns:
+                - idlieu
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        date:
+            type: date
+            nullable: true
+            comment: ''
+        heure:
+            type: time
+            nullable: true
+            comment: ''
+        description:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        titre:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        etat:
+            type: boolean
+            nullable: true
+            comment: ''
+    manyToOne:
+        iddomaine:
+            targetEntity: Domaine
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                iddomaine:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idgeolocalisation:
+            targetEntity: Geolocalisation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idgeolocalisation:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idlieu:
+            targetEntity: Lieu
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idlieu:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idcitoyen:
+            targetEntity: Utilisateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idcitoyen:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

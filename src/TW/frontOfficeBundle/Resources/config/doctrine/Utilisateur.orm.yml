@@ -1,0 +1,86 @@
+TW\frontOfficeBundle\Entity\Utilisateur:
+    type: entity
+    table: utilisateur
+    indexes:
+        fk_utilisateur_etablissement1_idx:
+            columns:
+                - idetablissement
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        prenom:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        photo:
+            type: blob
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        sexe:
+            type: string
+            nullable: true
+            length: 1
+            fixed: true
+            comment: ''
+        adress:
+            type: string
+            nullable: true
+            length: 45
+            fixed: false
+            comment: ''
+        login:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        mdp:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        mail:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        type:
+            type: string
+            nullable: true
+            length: 1
+            fixed: true
+            comment: ''
+        datenaissance:
+            type: date
+            nullable: true
+            comment: ''
+    manyToOne:
+        idetablissement:
+            targetEntity: Etablissement
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idetablissement:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

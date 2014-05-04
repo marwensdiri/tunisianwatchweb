@@ -1,0 +1,75 @@
+TW\frontOfficeBundle\Entity\Etablissement:
+    type: entity
+    table: etablissement
+    indexes:
+        fk_etablissement_lieux1_idx:
+            columns:
+                - idlieu
+        fk_etablissement_utilisateur1_idx:
+            columns:
+                - idresponsable
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        description:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        image:
+            type: blob
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+    manyToOne:
+        idlieu:
+            targetEntity: Lieu
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idlieu:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idresponsable:
+            targetEntity: Utilisateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idresponsable:
+                    referencedColumnName: id
+            orphanRemoval: false
+    manyToMany:
+        iddomaine:
+            targetEntity: Domaine
+            cascade: {  }
+            mappedBy: null
+            inversedBy: idetablissement
+            joinTable:
+                name: etablissement_domaine
+                joinColumns:
+                    -
+                        name: idetablissement
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    -
+                        name: iddomaine
+                        referencedColumnName: id
+            orderBy: null
+    lifecycleCallbacks: {  }

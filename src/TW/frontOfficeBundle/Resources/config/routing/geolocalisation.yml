@@ -1,0 +1,30 @@
+geolocalisation:
+    pattern:  /
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:index" }
+
+geolocalisation_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:show" }
+
+geolocalisation_new:
+    pattern:  /new
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:new" }
+
+geolocalisation_create:
+    pattern:  /create
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:create" }
+    requirements: { _method: post }
+
+geolocalisation_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:edit" }
+
+geolocalisation_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:update" }
+    requirements: { _method: post|put }
+
+geolocalisation_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "TWfrontOfficeBundle:Geolocalisation:delete" }
+    requirements: { _method: post|delete }

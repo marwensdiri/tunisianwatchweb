@@ -1,0 +1,13 @@
+parameters:
+#    tw_user.example.class: TW\UserBundle\Example
+
+services:
+#    tw_user.example:
+#        class: %tw_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+
+    acme_user.registration.form.type:
+        class: TW\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: TW_user_registration }

@@ -1,0 +1,40 @@
+TW\frontOfficeBundle\Entity\Geolocalisation:
+    type: entity
+    table: geolocalisation
+    indexes:
+        fk_geolocalisation_reclamation1_idx:
+            columns:
+                - idreclamation
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        lon:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+        lat:
+            type: float
+            nullable: true
+            precision: 10
+            scale: 0
+            comment: ''
+    manyToOne:
+        idreclamation:
+            targetEntity: Reclamation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idreclamation:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

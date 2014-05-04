@@ -1,0 +1,7 @@
+parameters:
+#    t_wfront_office.example.class: TW\frontOfficeBundle\Example
+
+services:
+#    t_wfront_office.example:
+#        class: %t_wfront_office.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

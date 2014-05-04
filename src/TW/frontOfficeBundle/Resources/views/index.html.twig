@@ -1,0 +1,166 @@
+{%extends "TWfrontOfficeBundle::layout.html.twig" %}
+
+{% block content %}
+    <div class="map-wrapper">
+        <div class="map">
+            <div id="map" class="map-inner"></div><!-- /.map-inner -->
+
+            <div class="container">
+                <div class="row">
+                    <div class="span3">
+                        <div class="property-filter pull-right">
+                            <div class="content">
+                                <form method="get" action="?">
+                                    <div class="location control-group">
+                                        <label class="control-label" for="inputLocation">
+                                            Lieu
+                                        </label>
+                                        <div class="controls">
+                                            <select id="inputLocation">
+                                                {% for lieu in Lieux %}
+                                                    <option id="{{lieu.id}}}">{{lieu}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+
+                                    <div class="type control-group">
+                                        <label class="control-label" for="inputType">
+                                            Domaine
+                                        </label>
+                                        <div class="controls">
+                                            <select id="inputType">
+                                                {% for domaine in Domaines %}
+                                                    <option id="{{domaine.id}}}">{{domaine}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+
+
+                                    <div class="rent control-group">
+                                        <div class="controls">
+                                            <label class="checkbox" for="inputRent">
+                                                <input type="checkbox" id="inputRent"> Réglé
+                                            </label>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+
+                                    <div class="sale control-group">
+                                        <div class="controls">
+                                            <label class="checkbox" for="inputSale">
+                                                <input type="checkbox" id="inputSale"> Non réglé
+                                            </label>
+                                        </div><!-- /.controls -->
+                                    </div><!-- /.control-group -->
+                                    <div class="form-actions">
+                                        <input type="submit" value="Filtrer les resultats !" class="btn btn-primary btn-large">
+                                    </div><!-- /.form-actions -->
+                                </form>
+                            </div><!-- /.content -->
+                        </div><!-- /.property-filter -->
+                    </div><!-- /.span3 -->
+                </div><!-- /.row -->
+            </div><!-- /.container -->
+        </div><!-- /.map -->
+    </div><!-- /.map-wrapper -->
+    <div id="alauneinternallink" class="container">
+        <div id="main">
+            <div class="row">
+                <div class="span9">
+                    <h1 class="page-header">Reclamations</h1>
+
+                    <div class="properties-grid">
+                        <div class="row">
+                            {% for reclamation in Reclamations %}
+                                <div class="property span3">
+                                    <div class="image">
+                                        <div class="content">
+                                            <a href="{{path('Reclamation_show',{id:reclamation.id})}}"></a>
+                                            <img src="{{asset('assets/img/tmp/property-small-1.png')}}" alt="">
+                                        </div><!-- /.content -->
+                                        {% if reclamation.etat == 0 %}
+                                       {% set etat = 'non reglée' %}
+                                        {% endif %}
+                                        <div class="reduced">{{etat}}</div><!-- /.reduced -->
+                                    </div><!-- /.image -->
+                                    <div class="title">
+                                        <h2>{{ reclamation.titre }}</h2>
+                                    </div><!-- /.title -->
+
+
+                                    <div class="location">{{ reclamation.idlieu }}</div><!-- /.location -->
+                                    <div class="area">
+                                        <span class="key">Auteur:</span><!-- /.key -->
+                                        <span class="value">{{reclamation.idcitoyen}}</span><!-- /.value -->
+                                    </div><!-- /.area -->
+
+
+                                    <div class="bedrooms"><div class="content"></div></div><!-- /.bedrooms -->
+                                    <div class="bathrooms"><div class="content"></div></div><!-- /.bathrooms -->
+                                </div><!-- /.property -->
+                            {% endfor %}
+
+                        </div><!-- /.row -->
+                    </div><!-- /.properties-grid -->
+                    <div class="pagination pagination-centered">
+                        <ul>
+                            <li><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li class="active"><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">next</a></li>
+                            <li><a href="#">last</a></li>
+                        </ul>
+                    </div><!-- /.pagination -->            </div>
+                <div class="sidebar span3">
+                    <div class="widget our-agents">
+                        <div class="title">
+                            <h2>Responsables</h2>
+                        </div><!-- /.title -->
+
+                        <div class="content">
+                            <div class="agent">
+                                <div class="image">
+                                    <img src="{{asset('assets/img/photos/emma-small.png')}}" alt="">
+                                </div><!-- /.image -->
+                                <div class="name">Victoria Summer</div><!-- /.name -->
+                                <div class="phone">333-666-777</div><!-- /.phone -->
+                                <div class="email"><a href="mailto:victoria@example.com">victoria@example.com</a></div><!-- /.email -->
+                            </div><!-- /.agent -->
+                        </div><!-- /.content -->
+                    </div><!-- /.our-agents -->
+                    <div class="hidden-tablet">
+                        <div class="widget properties last">
+                            <div class="title">
+                                <h2>Mes Réclamations</h2>
+                            </div><!-- /.title -->
+
+                            <div class="content">
+                                <div class="property">
+                                    <div class="image">
+                                        <a href="detail.html"></a>
+                                        <img src="{{asset('assets/img/tmp/property-small-4.png')}}" alt="">
+                                    </div><!-- /.image -->
+
+                                    <div class="wrapper">
+                                        <div class="title">
+                                            <h3>
+                                                <a href="{{asset('detail.html')}}">27523 Pacific Coast</a>
+                                            </h3>
+                                        </div><!-- /.title -->
+                                        <div class="location">Palo Alto CA</div><!-- /.location -->
+                                        <div class="price">€2 300 000</div><!-- /.price -->
+                                    </div><!-- /.wrapper -->
+                                </div><!-- /.property -->
+                            </div><!-- /.content -->
+                        </div><!-- /.properties -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock%}
+
+
+

@@ -1,0 +1,50 @@
+TW\frontOfficeBundle\Entity\Commentaire:
+    type: entity
+    table: commentaire
+    indexes:
+        FK_COMMENTA_REFERENCE_RECLAMAT:
+            columns:
+                - idreclamation
+        fk_commentaire_utilisateur1_idx:
+            columns:
+                - idutilisateur
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        texte:
+            type: text
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+        date:
+            type: datetime
+            nullable: true
+            comment: ''
+    manyToOne:
+        idutilisateur:
+            targetEntity: Utilisateur
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idutilisateur:
+                    referencedColumnName: id
+            orphanRemoval: false
+        idreclamation:
+            targetEntity: Reclamation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idreclamation:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

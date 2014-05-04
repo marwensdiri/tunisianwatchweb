@@ -1,0 +1,107 @@
+{%extends "TWfrontOfficeBundle::layout.html.twig" %}
+
+{% block content %}
+
+    <div class="container">
+        <div id="main">
+            <div class="row">
+                <div class="span12">
+                    <h1 class="page-header">{{reclamation.titre}}</h1>
+                    {% if documents|length>0 %}
+                        <div class="carousel property">
+                            <div class="preview">
+                                <img src="{{asset('assets/img/tmp/property-large-1.jpg')}}" alt="">
+                            </div><!-- /.preview -->
+
+                            <div class="content">
+                                <a class="carousel-prev" href="#">Previous</a>
+                                <a class="carousel-next" href="#">Next</a>
+                                <ul>
+                                    {% for document in documents %}
+                                    <li>
+                                        <img src="{{asset(document.url)}}" alt="">
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                            <!-- /.content -->
+                        </div>
+                        <!-- /.carousel -->
+                    {% endif %}
+
+                    <div class="property-detail">
+                        <div class="pull-left overview">
+                            <div class="row">
+                                <div class="span3">
+                                    <h2>Detail</h2>
+
+                                    <table>
+                                        <tr>
+                                            <th>Auteur:</th>
+                                            <td>{{reclamation.idcitoyen}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Domaine:</th>
+                                            <td>{{reclamation.iddomaine}}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Lieu:</th>
+                                            <td>{{reclamation.idlieu}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!-- /.span2 -->
+                            </div>
+                            <!-- /.row -->
+                        </div>
+
+                        <p><strong>
+                                {{reclamation.description}}
+                            </strong>
+                        </p>
+
+                        <div id="property-map"></div><!-- /#property-map -->
+                        <br>
+                        <div class="commentaire">
+                            {% if comments|length>0 %}
+                                {% for comment in comments %}
+                                    <div class="pull overview">
+                                        <div class="row">
+                                            <div class="span3">
+
+
+                                                <table>
+                                                    <tr>
+                                                        <th>Auteur:</th>
+                                                        <td>{{comment.idutilisateur}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Date:</th>
+                                                        <td>{{comment.date|date('Y-m-d H:i:s')}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th></th>
+                                                        <td>{{comment.texte}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                            </div>
+                            <div class="pull overview">
+                                <div class="row">
+                                    <div class="span9">
+                                        {{render(controller("TWfrontOfficeBundle:Commentaire:new",{'reclamation_id':reclamation.id}))}}
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- /#content -->
+{% endblock%}

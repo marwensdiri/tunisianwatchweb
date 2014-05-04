@@ -1,0 +1,50 @@
+TW\frontOfficeBundle\Entity\Document:
+    type: entity
+    table: document
+    indexes:
+        fk_document_reclamation1_idx:
+            columns:
+                - idreclamation
+    id:
+        id:
+            type: integer
+            nullable: false
+            unsigned: false
+            comment: ''
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        nom:
+            type: string
+            nullable: true
+            length: 45
+            fixed: false
+            comment: ''
+        type:
+            type: boolean
+            nullable: false
+            comment: ''
+        url:
+            type: string
+            nullable: true
+            length: 50
+            fixed: false
+            comment: ''
+        content:
+            type: blob
+            nullable: true
+            length: null
+            fixed: false
+            comment: ''
+    manyToOne:
+        idreclamation:
+            targetEntity: Reclamation
+            cascade: {  }
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                idreclamation:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }
